@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agenda — To Do List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="sheet">
+
+    <!-- ===== Header: Profile + Time ===== -->
+    <header class="cover">
+      <div class="profile">
+        <div class="avatar" id="avatarInitials">BP</div>
+        <div class="profile-text">
+          <p class="profile-name" id="profileName">Billy Prasasti</p>
+          <p class="profile-role" id="profileRole">Full Stack Developer</p>
+        </div>
+      </div>
+      <div class="clock" aria-live="polite">
+        <span class="clock-day" id="clockDay">Jumat</span>
+        <span class="clock-date" id="clockDate">25 Sep 2026</span>
+        <span class="clock-time" id="clockTime">00:00:00</span>
+      </div>
+    </header>
+
+    <!-- ===== Overdue banner ===== -->
+    <div class="overdue-banner" id="overdueBanner" hidden>
+      <span class="overdue-icon">!</span>
+      <span id="overdueText">Ada agenda yang lewat tenggat.</span>
+    </div>
+
+    <!-- ===== Input card ===== -->
+    <section class="composer" aria-label="Tambah agenda baru">
+      <label for="taskInput" class="composer-label">Apa yang perlu dikerjakan?</label>
+      <textarea id="taskInput" placeholder="Tulis agenda baru di sini…" rows="2" maxlength="140"></textarea>
+
+      <div class="composer-row">
+        <div class="field">
+          <span class="field-label">Prioritas</span>
+          <div class="priority-picker" role="radiogroup" aria-label="Level prioritas">
+            <button type="button" class="pri-btn pri-low" data-priority="Low" role="radio" aria-checked="false">Low</button>
+            <button type="button" class="pri-btn pri-medium" data-priority="Medium" role="radio" aria-checked="true">Medium</button>
+            <button type="button" class="pri-btn pri-high" data-priority="High" role="radio" aria-checked="false">High</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Tenggat (opsional)</span>
+          <input type="date" id="dueDateInput" class="due-input">
+        </div>
+      </div>
+
+      <button type="button" id="submitBtn" class="submit-btn">Tambahkan Agenda</button>
+    </section>
+
+    <!-- ===== Tabs (mobile) ===== -->
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="todo" role="tab" aria-selected="true">
+        To Do <span class="count" id="todoCount">0</span>
+      </button>
+      <button class="tab-btn" data-tab="done" role="tab" aria-selected="false">
+        Done <span class="count" id="doneCount">0</span>
+      </button>
+    </div>
+
+    <!-- ===== Lists ===== -->
+    <main class="board">
+      <section class="panel" id="todoPanel" data-panel="todo">
+        <div class="panel-head">
+          <h2>To Do</h2>
+        </div>
+        <ul class="task-list" id="todoList"></ul>
+        <p class="empty-state" id="todoEmpty">Belum ada agenda. Tulis satu di atas.</p>
+      </section>
+
+      <section class="panel" id="donePanel" data-panel="done" hidden>
+        <div class="panel-head">
+          <h2>Done</h2>
+        </div>
+        <ul class="task-list" id="doneList"></ul>
+        <p class="empty-state" id="doneEmpty">Belum ada agenda yang selesai.</p>
+      </section>
+    </main>
+
+    <footer class="board-footer">
+      <button type="button" id="deleteAllBtn" class="delete-all-btn">Hapus Semua Agenda</button>
+    </footer>
+
+  </div>
+
+  <!-- Confirm dialog for delete all -->
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle">
+      <p class="modal-title" id="modalTitle">Hapus seluruh agenda?</p>
+      <p class="modal-body">Semua agenda di To Do dan Done akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.</p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="modalCancel">Batal</button>
+        <button type="button" class="modal-confirm" id="modalConfirm">Hapus Semua</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
